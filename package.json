@@ -1,0 +1,30 @@
+{
+  "name": "datadog-rum-test",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "index.js",
+  "workspaces": [
+    "packages/frontend",
+    "packages/gateway",
+    "packages/ping",
+    "packages/echo"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": {
+    "email": "mark.wylde@deriv.com",
+    "name": "Mark Wylde",
+    "url": "https://github.com/markwylde-deriv"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "chokidar": "^3.5.3",
+    "esbuild": "^0.17.17"
+  },
+  "dependencies": {
+    "@datadog/browser-rum": "^4.39.0"
+  },
+  "description": ""
+}

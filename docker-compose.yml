@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./packages/frontend
+    environment:
+      DD_APPLICATION_ID: "${DD_APPLICATION_ID}"
+      DD_CLIENT_TOKEN: "${DD_CLIENT_TOKEN}"
+    ports:
+      - '8021:8021'
+
+  ping:
+    build:
+      context: ./packages/ping
+    ports:
+      - '8022:8022'
+    environment:
+      - DD_ENV=dev
+      - DD_LOGS_INJECTION=true
+      - DD_PROFILING_ENABLED=true
+      - DD_APPSEC_ENABLED=true
+      - DD_TRACE_DEBUG=true
+      - DD_AGENT_HOST=datadog-agent
+      - DD_TRACE_AGENT_PORT=8126
+
+  datadog-agent:
+    image: datadog/agent:latest
+    container_name: datadog-agent
+    ports:
+      - "8126:8126/tcp"
+    environment:
+      DD_API_KEY: "${DD_API_KEY}"
+      DD_LOGS_ENABLED: "true"
+      DD_LOGS_CONFIG_CONTAINER_COLLECT_ALL: "true"
+      DD_LOGS_CONFIG_DOCKER_CONTAINER_USE_FILE: "true"
+      DD_CONTAINER_EXCLUDE: "name:datadog-agent"
+      DD_PROCESS_AGENT_ENABLED: "true"
+      DD_SITE: "datadoghq.eu"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      - "/var/lib/docker/containers:/var/lib/docker/containers:ro"
+      - "/Users/markwylde/datadog-agent/run:/opt/datadog-agent/run:rw"
