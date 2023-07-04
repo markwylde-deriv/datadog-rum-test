@@ -21,10 +21,10 @@
   "license": "MIT",
   "devDependencies": {
     "chokidar": "^3.5.3",
-    "esbuild": "^0.17.17"
+    "esbuild": "^0.18.11"
   },
   "dependencies": {
-    "@datadog/browser-rum": "^4.39.0"
+    "@datadog/browser-rum": "^4.44.0"
   },
   "description": ""
 }
